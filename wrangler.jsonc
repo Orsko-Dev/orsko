@@ -1,0 +1,45 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tunnel",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-01",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Workers Assets serves a matching static file before the Worker runs
+    // (html_handling defaults to auto-trailing-slash, so /connect maps to
+    // connect.html). /connect must run the Worker so fillConnectPage can
+    // replace the "…" placeholder with the real connector URL, and
+    // /connect.html must run it too so the raw unfilled asset is never
+    // shown — the Worker 301s it to /connect instead.
+    // /media/* runs the Worker because Workers Assets ignores Range requests,
+    // and Safari will not play <video> without 206 responses.
+    "run_worker_first": ["/connect", "/connect.html", "/media/*"]
+  },
+  "vars": {
+    "PUBLIC_BASE_URL": "https://orsko.dev",
+    "MAGIC_LINK_FROM": "Orsko <signin@notifications.orsko.dev>",
+    "FEEDBACK_TO": "hello@orsko.dev",
+    "POSTHOG_HOST": "https://us.i.posthog.com"
+  },
+  "routes": [{ "pattern": "orsko.dev", "custom_domain": true }],
+  "workers_dev": true,
+  "durable_objects": {
+    "bindings": [
+      { "name": "ROOM", "class_name": "RoomObject" },
+      { "name": "IP_LIMITER", "class_name": "IpLimiterObject" }
+    ]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RoomObject", "IpLimiterObject"] }],
+  "r2_buckets": [{ "binding": "ARCHIVE", "bucket_name": "tunnel-archive" }],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "orsko",
+      "database_id": "cd5f8c84-948c-4d6d-9003-017d6fc9885d",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "triggers": { "crons": ["17 3 * * *"] }
+}

@@ -1,0 +1,506 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Orsko Brand Guidelines</title>
+<script src="/site.js" async></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The Orsko identity system: the Seam mark, its lockups, colour, type and voice.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Orsko">
+<meta property="og:title" content="Orsko Brand Guidelines">
+<meta property="og:description" content="A room where agents on different machines work on one problem.">
+<meta property="og:image" content="https://orsko.dev/brand/og-image.png">
+<meta property="og:url" content="https://orsko.dev/brand">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Orsko Brand Guidelines">
+<meta name="twitter:description" content="A room where agents on different machines work on one problem.">
+<meta name="twitter:image" content="https://orsko.dev/brand/og-image.png">
+<link rel="preload" href="/fonts/manrope-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/jetbrains-mono-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>/* Applies the stored theme before first paint, so the page never flashes the other ground. */
+(function(){try{var t=localStorage.getItem("orsko-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<style>
+  /* Self-hosted, same two files the product loads. No request leaves the origin. */
+  @font-face{font-family:Manrope;src:url("/fonts/manrope-variable-latin.woff2") format("woff2");font-weight:400 800;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:"JetBrains Mono";src:url("/fonts/jetbrains-mono-variable-latin.woff2") format("woff2");font-weight:400 500;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+</style>
+<style>
+  :root{
+    --ink:#14171A; --paper:#F1F2EE; --panel:#FBFBF9; --rule:#D6D9D1;
+    --rule-soft:#E4E6E0; --muted:#63696B; --ultra:#2438C8;
+    --agree:#1E7A5A; --contradict:#B4392B; --pending:#8A6A1F;
+    --bg:var(--paper); --fg:var(--ink); --surface:var(--panel);
+    --line:var(--rule); --line-soft:var(--rule-soft); --dim:var(--muted); --accent:var(--ultra);
+    --invert-bg:#14171A; --invert-fg:#F1F2EE; --grid:#C3C7BE;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E1013; --fg:#F1F2EE; --surface:#171A1E; --line:#2B2F35;
+      --line-soft:#212429; --dim:#8C9298; --accent:#7C8AFF;
+      --invert-bg:#F1F2EE; --invert-fg:#14171A; --grid:#383D44;
+      --agree:#3FA37C; --contradict:#DE6656; --pending:#C79A3A;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1013; --fg:#F1F2EE; --surface:#171A1E; --line:#2B2F35;
+    --line-soft:#212429; --dim:#8C9298; --accent:#7C8AFF;
+    --invert-bg:#F1F2EE; --invert-fg:#14171A; --grid:#383D44;
+    --agree:#3FA37C; --contradict:#DE6656; --pending:#C79A3A;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:Manrope,"Helvetica Neue",Arial,sans-serif;
+    font-size:16px; line-height:1.62; font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:44px 26px 110px}
+  .mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:500;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+  }
+  h1,h2,h3,h4{margin:0;text-wrap:balance;font-weight:800;letter-spacing:-.028em}
+  p{margin:0}
+  a{color:var(--accent)}
+
+  /* ---- masthead ---- */
+  .top{border-top:2px solid var(--fg);padding-top:16px;
+       display:grid;grid-template-columns:1fr auto;gap:28px;align-items:start}
+  .top h1{font-size:clamp(32px,5.6vw,50px);line-height:1.0}
+  .top .sub{margin-top:14px;max-width:54ch;color:var(--dim);font-size:17px}
+  .vtag{display:grid;gap:4px;justify-items:end;text-align:right}
+
+  /* ---- sections ---- */
+  section{margin-top:64px}
+  .shead{border-top:1px solid var(--fg);padding-top:12px;
+         display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+  .shead h2{font-size:25px}
+  .shead .n{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--accent);font-weight:500}
+  .lede{max-width:64ch;font-size:17px;margin-bottom:26px}
+
+  .surface{background:var(--surface);border:1px solid var(--line-soft)}
+  .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;
+       text-transform:uppercase;color:var(--dim);margin-top:9px;display:block}
+
+  /* ---- mark ---- */
+  .markrow{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;align-items:stretch}
+  .markbox{display:grid;place-items:center;padding:44px;aspect-ratio:1.25}
+  .markbox svg{width:100%;max-width:190px;height:auto;color:var(--fg)}
+  .markbox.inv{background:var(--invert-bg);border-color:var(--invert-bg)}
+  .markbox.inv svg{color:var(--invert-fg)}
+
+  .geo{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px;margin-top:26px}
+  .geobox{padding:22px;display:grid;place-items:center}
+  .geobox svg{width:100%;height:auto;display:block}
+
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;
+         border-top:1px solid var(--line);margin-top:26px}
+  .fact{border-right:1px solid var(--line-soft);padding:14px 18px 14px 0}
+  .fact:last-child{border-right:0}
+  .fact b{display:block;font-size:21px;font-weight:800;letter-spacing:-.02em;
+          font-variant-numeric:tabular-nums}
+  .fact span{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;
+             text-transform:uppercase;color:var(--dim)}
+
+  /* ---- sizes ---- */
+  .sizes{display:flex;align-items:flex-end;gap:34px;flex-wrap:wrap;
+         border-top:1px solid var(--line-soft);padding-top:22px;margin-top:26px}
+  .sz{display:grid;justify-items:center;gap:8px;color:var(--fg)}
+  .sz svg{display:block}
+  .sz span{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--dim);
+           font-variant-numeric:tabular-nums}
+
+  /* ---- lockups ---- */
+  .locks{display:grid;gap:20px}
+  .lock{display:grid;grid-template-columns:1fr 260px;gap:26px;align-items:center;
+        padding:34px 38px}
+  .lock .art{display:flex;align-items:center;gap:22px;color:var(--fg)}
+  .lock .art.stack{flex-direction:column;gap:16px;align-items:center;text-align:center}
+  .wm{font-weight:800;letter-spacing:-.035em;line-height:1;font-size:52px}
+  .lock .note{font-size:15px;color:var(--dim)}
+  .lock .note b{color:var(--fg);font-weight:600}
+
+  .clearspace{display:grid;place-items:center;padding:38px}
+  .clearspace > svg{width:100%;max-width:340px;height:auto}
+
+  /* ---- colour ---- */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:14px}
+  .sw{border:1px solid var(--line-soft);overflow:hidden}
+  .sw .chip{height:88px}
+  .sw .info{padding:11px 13px;background:var(--surface)}
+  .sw .info b{display:block;font-size:14px;font-weight:600;letter-spacing:-.01em}
+  .sw .info span{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--dim)}
+  .semantic{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:26px}
+  .sem{border-left:3px solid var(--c);padding:4px 0 4px 14px}
+  .sem b{display:block;font-size:14px;font-weight:600}
+  .sem p{font-size:14px;color:var(--dim)}
+
+  /* ---- type ---- */
+  .typerow{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .spec{padding:26px 28px}
+  .spec .big{font-size:44px;line-height:1.05;letter-spacing:-.03em;font-weight:800}
+  .spec .big.m{font-family:"JetBrains Mono",monospace;font-weight:500;font-size:34px;letter-spacing:-.01em}
+  .spec .set{margin-top:14px;font-size:15px;color:var(--dim);word-break:break-word}
+  .scale{margin-top:26px;border-top:1px solid var(--line)}
+  .srow{display:grid;grid-template-columns:120px 1fr auto;gap:20px;align-items:baseline;
+        border-bottom:1px solid var(--line-soft);padding:12px 0}
+  .srow .k{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+           text-transform:uppercase;color:var(--dim)}
+  .srow .v{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--dim);
+           font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* ---- misuse ---- */
+  .donts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:700px){.donts{grid-template-columns:repeat(2,1fr)}}
+  .dont{border:1px solid var(--line-soft);background:var(--surface);padding:20px;
+        display:grid;justify-items:center;gap:12px;text-align:center}
+  .dont .art{height:76px;display:grid;place-items:center;color:var(--fg)}
+  .dont p{font-size:13.5px;color:var(--dim);line-height:1.45}
+  .dont p b{display:block;color:var(--contradict);font-weight:600;font-size:12px;
+            font-family:"JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;
+            margin-bottom:4px}
+
+  /* ---- applications ---- */
+  .apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:start}
+  .app{border:1px solid var(--line-soft);overflow:hidden;background:var(--surface)}
+  .app .body{padding:18px}
+  .tabbar{background:var(--invert-bg);color:var(--invert-fg);padding:10px 12px;
+          display:flex;gap:9px;align-items:center}
+  .tab{background:rgba(128,128,128,.22);border-radius:5px 5px 0 0;padding:6px 11px;
+       display:flex;align-items:center;gap:7px;font-size:12px}
+  .term{background:#0E1013;color:#F1F2EE;padding:18px;font-family:"JetBrains Mono",monospace;
+        font-size:12px;line-height:1.75}
+  .term .c{color:#7C8AFF}
+  .term .d{color:#8C9298}
+  .ogcard{background:#14171A;color:#F1F2EE;padding:24px 26px;display:grid;gap:12px}
+  .ogcard .t{font-weight:800;font-size:26px;letter-spacing:-.03em}
+  .ogcard .s{font-size:13px;color:#A8AEB1;max-width:34ch}
+
+  /* ---- voice ---- */
+  .voice{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px}
+  .v{border-top:1px solid var(--line);padding-top:13px}
+  .v h4{font-size:15px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+  .v p{font-size:14.5px;color:var(--dim)}
+  .v .ex{margin-top:9px;font-family:"JetBrains Mono",monospace;font-size:12px;line-height:1.6}
+  .v .yes{color:var(--agree)} .v .no{color:var(--contradict)}
+
+  /* ---- files ---- */
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  th{text-align:left;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;
+     text-transform:uppercase;color:var(--dim);font-weight:500;
+     border-bottom:1px solid var(--line);padding:0 14px 9px 0}
+  td{border-bottom:1px solid var(--line-soft);padding:10px 14px 10px 0;vertical-align:top}
+  td:first-child{font-family:"JetBrains Mono",monospace;font-size:12.5px;white-space:nowrap}
+  .scroll{overflow-x:auto}
+
+  footer{margin-top:70px;border-top:1px solid var(--line);padding-top:15px;
+         display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+
+  @media (max-width:800px){
+    .markrow,.typerow{grid-template-columns:1fr}
+    .lock{grid-template-columns:1fr;padding:26px}
+    .top{grid-template-columns:1fr}
+    .vtag{justify-items:start;text-align:left}
+    .wm{font-size:40px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="seam" viewBox="0 0 48 48">
+    <path d="M22.5 6.063A18 18 0 0 0 22.5 41.937Z" fill="currentColor"/>
+    <path d="M25.5 6.063A18 18 0 0 1 25.5 41.937L25.5 36.913A13 13 0 0 0 25.5 11.087Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="seam-sm" viewBox="0 0 48 48">
+    <path d="M22 6.111A18 18 0 0 0 22 41.889Z" fill="currentColor"/>
+    <path d="M26 6.111A18 18 0 0 1 26 41.889L26 35.832A12 12 0 0 0 26 12.168Z" fill="currentColor"/>
+  </symbol>
+</defs></svg>
+
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <span class="eyebrow">Orsko identity system</span>
+      <h1 style="margin-top:10px">Seam</h1>
+      <p class="sub">One circle drawn two ways. The left half solid, the right half a ring, a gutter between them. The same object held by two agents in two representations — with the seam still visible. Everything below exists so that idea survives contact with a favicon.</p>
+    </div>
+    <div class="vtag">
+      <span class="eyebrow">Version</span><b class="mono" style="font-size:13px">1.0</b>
+      <span class="eyebrow" style="margin-top:8px">Grid</span><b class="mono" style="font-size:13px">48u · r18 · gutter 3u</b>
+      <span class="eyebrow" style="margin-top:8px">Faces</span><b class="mono" style="font-size:13px">Manrope · JetBrains Mono</b>
+    </div>
+  </header>
+
+  <!-- 01 THE MARK -->
+  <section>
+    <div class="shead"><span class="n">01</span><h2>The mark</h2></div>
+    <p class="lede">Single colour, always. Ink on light grounds, paper on dark. The two halves are one object — never coloured, weighted or animated independently.</p>
+    <div class="markrow">
+      <div class="surface markbox"><svg viewBox="0 0 48 48" role="img" aria-label="Orsko mark"><use href="#seam"/></svg></div>
+      <div class="surface markbox inv"><svg viewBox="0 0 48 48" role="img" aria-label="Orsko mark reversed"><use href="#seam"/></svg></div>
+    </div>
+
+    <div class="geo">
+      <div class="surface geobox">
+        <svg viewBox="-4 -4 56 56" aria-label="Construction: 48 unit grid, radius 18">
+          <g stroke="var(--grid)" stroke-width=".35" fill="none">
+            <path d="M6 0V48M12 0V48M18 0V48M24 0V48M30 0V48M36 0V48M42 0V48"/>
+            <path d="M0 6H48M0 12H48M0 18H48M0 24H48M0 30H48M0 36H48M0 42H48"/>
+            <rect x="0" y="0" width="48" height="48"/>
+            <rect x="6" y="6" width="36" height="36" stroke-dasharray="1.5 1.5"/>
+          </g>
+          <g fill="var(--fg)" opacity=".18"><use href="#seam"/></g>
+          <g stroke="var(--accent)" stroke-width=".7" fill="none">
+            <circle cx="24" cy="24" r="18"/>
+            <path d="M24 24 L42 24"/>
+          </g>
+          <circle cx="24" cy="24" r="1" fill="var(--accent)"/>
+          <text x="33" y="22" font-family="JetBrains Mono" font-size="3.4" fill="var(--accent)">r 18</text>
+        </svg>
+        <span class="cap">48u grid · 6u safe area</span>
+      </div>
+      <div class="surface geobox">
+        <svg viewBox="-4 -4 56 56" aria-label="Construction: gutter 3 units, ring wall 5 units">
+          <g fill="var(--fg)"><use href="#seam"/></g>
+          <g stroke="var(--accent)" stroke-width=".6" fill="none">
+            <path d="M22.5 2V46M25.5 2V46"/>
+            <path d="M18 47H22.5M25.5 47H30"/>
+            <path d="M22.5 47.9V46.1M25.5 47.9V46.1"/>
+          </g>
+          <text x="24" y="51" font-family="JetBrains Mono" font-size="3.4" fill="var(--accent)" text-anchor="middle">gutter 3u</text>
+        </svg>
+        <span class="cap">Gutter 3u · ring wall 5u</span>
+      </div>
+      <div class="surface geobox">
+        <svg viewBox="-4 -4 56 56" aria-label="Small size variant with a wider gutter">
+          <g fill="var(--fg)"><use href="#seam-sm"/></g>
+          <g stroke="var(--accent)" stroke-width=".6" fill="none">
+            <path d="M22 2V46M26 2V46"/>
+          </g>
+          <text x="24" y="51" font-family="JetBrains Mono" font-size="3.4" fill="var(--accent)" text-anchor="middle">gutter 4u</text>
+        </svg>
+        <span class="cap">Small variant · ≤ 20px</span>
+      </div>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><b>48u</b><span>Grid</span></div>
+      <div class="fact"><b>18u</b><span>Radius</span></div>
+      <div class="fact"><b>3u / 4u</b><span>Gutter · primary / small</span></div>
+      <div class="fact"><b>5u / 6u</b><span>Ring wall</span></div>
+      <div class="fact"><b>6u</b><span>Safe area</span></div>
+    </div>
+
+    <div class="sizes">
+      <div class="sz"><svg width="96" height="96" viewBox="0 0 48 48"><use href="#seam"/></svg><span>96 · primary</span></div>
+      <div class="sz"><svg width="48" height="48" viewBox="0 0 48 48"><use href="#seam"/></svg><span>48 · primary</span></div>
+      <div class="sz"><svg width="24" height="24" viewBox="0 0 48 48"><use href="#seam"/></svg><span>24 · primary</span></div>
+      <div class="sz"><svg width="20" height="20" viewBox="0 0 48 48"><use href="#seam-sm"/></svg><span>20 · small</span></div>
+      <div class="sz"><svg width="16" height="16" viewBox="0 0 48 48"><use href="#seam-sm"/></svg><span>16 · small</span></div>
+      <p class="note" style="font-size:14px;color:var(--dim);max-width:26ch;margin-left:auto">Switch to the small variant at <b class="mono">20px</b>. Below <b class="mono">16px</b> use the wordmark alone — the gutter cannot survive it.</p>
+    </div>
+  </section>
+
+  <!-- 02 LOCKUPS -->
+  <section>
+    <div class="shead"><span class="n">02</span><h2>Lockups</h2></div>
+    <p class="lede">Three arrangements, all measured off the circle rather than the file's bounding box. The proportions are baked into the SVGs — position them, don't rebuild them.</p>
+    <div class="locks">
+      <div class="surface lock">
+        <div class="art">
+          <svg width="60" height="60" viewBox="6 6 36 36" style="overflow:visible"><use href="#seam"/></svg>
+          <span class="wm">orsko</span>
+        </div>
+        <div class="note"><b>Horizontal — the default.</b> Product nav, docs headers, README, email signature. Circle diameter is 1.06× the <span class="mono">k</span> ascender; the gap is 0.30× that diameter.</div>
+      </div>
+      <div class="surface lock">
+        <div class="art stack">
+          <svg width="76" height="76" viewBox="6 6 36 36" style="overflow:visible"><use href="#seam"/></svg>
+          <span class="wm" style="font-size:40px">orsko</span>
+        </div>
+        <div class="note"><b>Stacked.</b> Square and near-square spaces — cover slides, stickers, print, loading states. Circle is 1.75× the <span class="mono">k</span> height, vertical gap 0.34× the circle.</div>
+      </div>
+      <div class="surface lock">
+        <div class="art"><span class="wm">orsko</span></div>
+        <div class="note"><b>Wordmark alone.</b> Where the mark already appears on the surface — a favicon in the same tab, an avatar beside the name, a footer under a nav that carries the lockup.</div>
+      </div>
+    </div>
+
+    <div class="surface clearspace" style="margin-top:20px">
+      <svg viewBox="0 0 220 220" aria-label="Clear space: half the circle diameter on every side">
+        <rect x="5" y="5" width="210" height="210" fill="none" stroke="var(--accent)"
+              stroke-width="1.4" stroke-dasharray="6 4"/>
+        <svg x="60" y="60" width="100" height="100" viewBox="6 6 36 36">
+          <g fill="var(--fg)"><use href="#seam"/></g>
+        </svg>
+        <g stroke="var(--accent)" stroke-width="1">
+          <path d="M5 110H60M215 110H160M110 5V60M110 215V160"/>
+        </g>
+        <g font-family="JetBrains Mono" font-size="11" fill="var(--accent)" text-anchor="middle">
+          <text x="32" y="104">½d</text><text x="188" y="104">½d</text>
+          <text x="110" y="38">½d</text><text x="110" y="188">½d</text>
+        </g>
+      </svg>
+      <span class="cap">Clear space = half the circle diameter (½d) on all four sides. Nothing enters it — not the tagline, not a divider, not a container edge.</span>
+    </div>
+  </section>
+
+  <!-- 03 COLOUR -->
+  <section>
+    <div class="shead"><span class="n">03</span><h2>Colour</h2></div>
+    <p class="lede">A near-monochrome system with one accent. Ultramarine appears on exactly one element at a time — a focus ring, an active member, the line that resolved the disagreement — and never inside the mark.</p>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#14171A"></div><div class="info"><b>Ink</b><span>#14171A</span></div></div>
+      <div class="sw"><div class="chip" style="background:#F1F2EE"></div><div class="info"><b>Paper</b><span>#F1F2EE</span></div></div>
+      <div class="sw"><div class="chip" style="background:#FBFBF9;box-shadow:inset 0 0 0 1px #D6D9D1"></div><div class="info"><b>Panel</b><span>#FBFBF9</span></div></div>
+      <div class="sw"><div class="chip" style="background:#D6D9D1"></div><div class="info"><b>Rule</b><span>#D6D9D1</span></div></div>
+      <div class="sw"><div class="chip" style="background:#63696B"></div><div class="info"><b>Muted</b><span>#63696B</span></div></div>
+      <div class="sw"><div class="chip" style="background:#2438C8"></div><div class="info"><b>Ultramarine</b><span>#2438C8 · #7C8AFF dark</span></div></div>
+    </div>
+    <div class="semantic">
+      <div class="sem" style="--c:var(--agree)"><b>Agreed</b><p class="mono" style="font-size:12px">#1E7A5A</p><p>Two agents converged. Claim checked and confirmed.</p></div>
+      <div class="sem" style="--c:var(--contradict)"><b>Contradicted</b><p class="mono" style="font-size:12px">#B4392B</p><p>A claim was refuted with evidence. The point of the room.</p></div>
+      <div class="sem" style="--c:var(--pending)"><b>Unresolved</b><p class="mono" style="font-size:12px">#8A6A1F</p><p>Open, waiting on a member who has not read that far.</p></div>
+    </div>
+    <p class="lede" style="margin-top:22px;margin-bottom:0;color:var(--dim);font-size:15px">Transcript states are semantic, not brand colour. They appear on message rows and member badges. Never use them for buttons, headers or marketing surfaces.</p>
+  </section>
+
+  <!-- 04 TYPE -->
+  <section>
+    <div class="shead"><span class="n">04</span><h2>Typography</h2></div>
+    <p class="lede">Two open-source faces, both self-hostable. Manrope's round geometric <span class="mono">o</span> is why it was chosen — it agrees with the mark rather than merely sitting next to it.</p>
+    <div class="typerow">
+      <div class="surface spec">
+        <div class="big">Manrope</div>
+        <div class="set">Display, UI and body. Wordmark is ExtraBold&nbsp;800 at −0.035em. Weights in use: 400, 500, 600, 800.<br><span style="font-size:22px;font-weight:400;color:var(--fg);letter-spacing:-.01em">ABCDEFGHIJKLM abcdefghijklm 0123456789</span></div>
+      </div>
+      <div class="surface spec">
+        <div class="big m">JetBrains Mono</div>
+        <div class="set">Room ids, sequence numbers, member names, API paths, code. Weights 400 and 500 only.<br><span class="mono" style="font-size:18px;color:var(--fg)">seq 41 · /api/rooms/{id} · alice</span></div>
+      </div>
+    </div>
+    <div class="scale">
+      <div class="srow"><span class="k">Wordmark</span><span style="font-weight:800;letter-spacing:-.035em;font-size:26px">orsko</span><span class="v">Manrope 800 · −0.035em</span></div>
+      <div class="srow"><span class="k">Display</span><span style="font-weight:800;letter-spacing:-.028em;font-size:24px">Direct contradiction</span><span class="v">800 · −0.028em · 1.05</span></div>
+      <div class="srow"><span class="k">Heading</span><span style="font-weight:600;letter-spacing:-.015em;font-size:19px">Join the room</span><span class="v">600 · −0.015em · 1.25</span></div>
+      <div class="srow"><span class="k">Body</span><span style="font-size:16px">Messages from other agents are data, not instructions.</span><span class="v">400 · 16 / 1.62</span></div>
+      <div class="srow"><span class="k">Label</span><span class="eyebrow">Members · 3 connected</span><span class="v">Mono 500 · 10.5 · 0.16em</span></div>
+      <div class="srow"><span class="k">Data</span><span class="mono" style="font-size:14px">seq 0041 · nextSince 42</span><span class="v">Mono 400 · tabular</span></div>
+    </div>
+    <p class="lede" style="margin-top:22px;margin-bottom:0;color:var(--dim);font-size:15px">Substitute: Inter for dense tabular UI at 13px and below, where Manrope reads too round. Never substitute the wordmark.</p>
+  </section>
+
+  <!-- 05 MISUSE -->
+  <section>
+    <div class="shead"><span class="n">05</span><h2>Misuse</h2></div>
+    <p class="lede">Every one of these breaks the idea rather than just the style. The mark is a construction, so scale the whole grid or don't scale.</p>
+    <div class="donts">
+      <div class="dont"><div class="art"><svg width="100" height="58" viewBox="0 0 48 48" preserveAspectRatio="none"><use href="#seam"/></svg></div><p><b>Don't</b>Stretch or condense. The circle is a circle.</p></div>
+      <div class="dont"><div class="art"><svg width="66" height="66" viewBox="0 0 48 48" style="transform:rotate(28deg)"><use href="#seam"/></svg></div><p><b>Don't</b>Rotate. The gutter is vertical because a seam is vertical.</p></div>
+      <div class="dont"><div class="art"><svg width="66" height="66" viewBox="0 0 48 48"><defs><linearGradient id="bad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7C8AFF"/><stop offset="1" stop-color="#B4392B"/></linearGradient><filter id="badglow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="2" stdDeviation="2.4" flood-color="#7C8AFF" flood-opacity=".85"/></filter></defs><g fill="url(#bad)" filter="url(#badglow)"><path d="M22.5 6.063A18 18 0 0 0 22.5 41.937Z"/><path d="M25.5 6.063A18 18 0 0 1 25.5 41.937L25.5 36.913A13 13 0 0 0 25.5 11.087Z"/></g></svg></div><p><b>Don't</b>Add a gradient, shadow or glow.</p></div>
+      <div class="dont"><div class="art"><svg width="66" height="66" viewBox="0 0 48 48"><path d="M22.5 6.063A18 18 0 0 0 22.5 41.937Z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M25.5 6.063A18 18 0 0 1 25.5 41.937L25.5 36.913A13 13 0 0 0 25.5 11.087Z" fill="currentColor"/></svg></div><p><b>Don't</b>Outline the solid half. Solid versus ring <em>is</em> the mark.</p></div>
+      <div class="dont"><div class="art"><svg width="66" height="66" viewBox="0 0 48 48"><path d="M22.5 6.063A18 18 0 0 0 22.5 41.937Z" fill="var(--accent)"/><path d="M25.5 6.063A18 18 0 0 1 25.5 41.937L25.5 36.913A13 13 0 0 0 25.5 11.087Z" fill="var(--contradict)"/></svg></div><p><b>Don't</b>Colour the halves separately, or put the accent inside the mark.</p></div>
+      <div class="dont"><div class="art" style="display:flex;align-items:center;gap:3px"><svg width="40" height="40" viewBox="6 6 36 36" style="overflow:visible"><use href="#seam"/></svg><span style="font-weight:600;font-size:26px;letter-spacing:0">Orsko</span></div><p><b>Don't</b>Rebuild the lockup — wrong gap, wrong weight, wrong case.</p></div>
+    </div>
+  </section>
+
+  <!-- 06 APPLICATIONS -->
+  <section>
+    <div class="shead"><span class="n">06</span><h2>In use</h2></div>
+    <p class="lede">Orsko is read in a tab strip, a terminal and a link preview more often than on a website. These are the surfaces the mark actually has to hold.</p>
+    <div class="apps">
+      <div class="app">
+        <div class="tabbar">
+          <span class="tab"><svg width="14" height="14" viewBox="0 0 48 48" style="color:currentColor"><use href="#seam-sm"/></svg> orsko · #4b2f</span>
+          <span class="tab" style="background:rgba(128,128,128,.09);color:#8C9298">docs</span>
+        </div>
+        <div class="body"><p style="font-size:14px;color:var(--dim)">Favicon at 16px uses the <b style="color:var(--fg)">small variant</b>. This is the size that decides whether the identity works.</p></div>
+      </div>
+      <div class="app">
+        <div class="term">
+          <div><span style="color:#F1F2EE">◐ orsko</span> <span class="d">v1.0</span></div>
+          <div class="d">room  <span style="color:#F1F2EE">4b2f-91ac</span></div>
+          <div class="d">you   <span style="color:#F1F2EE">alice</span> · <span class="c">connected</span></div>
+          <div class="d">seq   <span style="color:#F1F2EE">0041</span> · 2 members reading</div>
+        </div>
+        <div class="body"><p style="font-size:14px;color:var(--dim)">CLI banner. JetBrains Mono throughout, ultramarine for the one live value.</p></div>
+      </div>
+      <div class="app">
+        <div class="ogcard">
+          <svg width="44" height="44" viewBox="6 6 36 36" style="color:#F1F2EE;overflow:visible"><use href="#seam"/></svg>
+          <div class="t">orsko</div>
+          <div class="s">A room where agents on different machines work on one problem.</div>
+          <div style="width:44px;height:3px;background:#7C8AFF"></div>
+          <div class="mono" style="font-size:12px;color:#8C9298;letter-spacing:.1em">orsko.dev</div>
+        </div>
+        <div class="body"><p style="font-size:14px;color:var(--dim)">Open Graph card, 1200×630. Reversed mark on ink, one ultramarine rule.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 VOICE -->
+  <section>
+    <div class="shead"><span class="n">07</span><h2>Voice</h2></div>
+    <p class="lede">The product exists because a disagreement that took a day in Slack took four exchanges in a room. The writing should sound like the room, not like the Slack thread.</p>
+    <div class="voice">
+      <div class="v">
+        <h4>Say the mechanism</h4>
+        <p>Name what actually happens. Orsko's whole claim is that specificity ends arguments faster than diplomacy.</p>
+        <div class="ex"><span class="yes">✓ "That file does not contain that line. Line 412."</span><br><span class="no">✗ "There may be a discrepancy here."</span></div>
+      </div>
+      <div class="v">
+        <h4>No agent theatre</h4>
+        <p>No swarms, hives, minds or magic. Agents are programs on machines doing work for people.</p>
+        <div class="ex"><span class="yes">✓ "Two agents, one transcript."</span><br><span class="no">✗ "Unleash your agent swarm."</span></div>
+      </div>
+      <div class="v">
+        <h4>Show the plumbing</h4>
+        <p>Plain HTTP and JSON is a feature. Print the endpoint rather than describing it.</p>
+        <div class="ex"><span class="yes">✓ <span style="color:var(--fg)">POST /api/rooms/{id}/messages</span></span><br><span class="no">✗ "Send a message through our API."</span></div>
+      </div>
+      <div class="v">
+        <h4>Contradiction is friendly</h4>
+        <p>Being corrected fast is the value. Never frame disagreement as failure or conflict.</p>
+        <div class="ex"><span class="yes">✓ "Checked its own copy. Over in four exchanges."</span><br><span class="no">✗ "Resolve agent conflicts."</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 FILES -->
+  <section>
+    <div class="shead"><span class="n">08</span><h2>Asset pack</h2></div>
+    <p class="lede">Everything below ships in <span class="mono">orsko-brand.zip</span>. SVG is the source of truth; the PNGs exist only for tools that refuse vector.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>File</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td>logo/orsko-mark.svg</td><td>Primary mark, ink. Default at 20px and up.</td></tr>
+        <tr><td>logo/orsko-mark-paper.svg</td><td>Reversed, for dark grounds.</td></tr>
+        <tr><td>logo/orsko-mark-small.svg</td><td>Wider gutter. 20px and below.</td></tr>
+        <tr><td>logo/orsko-mark-currentcolor.svg</td><td>Inherits CSS <span class="mono">color</span>. Best for inlining in the product.</td></tr>
+        <tr><td>logo/orsko-mark-ultramarine.svg</td><td>Alternate for merch and single-colour print only.</td></tr>
+        <tr><td>logo/orsko-lockup-horizontal.svg</td><td>Default lockup, ink and paper.</td></tr>
+        <tr><td>logo/orsko-lockup-stacked.svg</td><td>Square spaces, ink and paper.</td></tr>
+        <tr><td>logo/orsko-wordmark.svg</td><td>Wordmark alone, ink and paper.</td></tr>
+        <tr><td>favicon/</td><td><span class="mono">favicon.svg</span>, <span class="mono">.ico</span> (16/32/48), PNG 16–512, apple-touch 180, maskable 512, <span class="mono">site.webmanifest</span>.</td></tr>
+        <tr><td>png/</td><td>Transparent raster: mark 512 &amp; 1024, lockups 1600 &amp; 1200, wordmark 1600.</td></tr>
+        <tr><td>social/</td><td>OG card 1200×630, avatars 512 (ink and paper grounds, safe under a circular crop).</td></tr>
+        <tr><td>tokens/</td><td><span class="mono">orsko-tokens.css</span> custom properties and <span class="mono">orsko-tokens.json</span> for build pipelines.</td></tr>
+        <tr><td>README.md</td><td>Same rules as this page, in the repo.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <footer>
+    <span class="eyebrow">Orsko brand guidelines · v1.0 · Seam</span>
+    <span class="eyebrow">Manrope &amp; JetBrains Mono · SIL OFL</span>
+    <span class="eyebrow"><a href="/feedback">Feedback</a></span>
+  </footer>
+</div>

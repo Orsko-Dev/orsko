@@ -1,0 +1,703 @@
+/* ------------------------------------------------------------------ *
+ * Orsko — Seam. Near-monochrome, hairline rules, one ultramarine
+ * element per view. See /brand for the guidelines this implements.
+ *
+ * The brand tokens this file reads live in /brand/tokens.css, linked from
+ * every page head ahead of this one; importing them from here would cost a
+ * serial round trip before the first rule can paint.
+ * ------------------------------------------------------------------ */
+
+/* Self-hosted; no request for a font ever leaves the origin. */
+@font-face {
+  font-family: Manrope;
+  src: url("/fonts/manrope-variable-latin.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-variable-latin.woff2") format("woff2");
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- palette ---------- */
+
+:root {
+  --bg: var(--orsko-paper);
+  --fg: var(--orsko-ink);
+  --surface: var(--orsko-panel);
+  --line: var(--orsko-rule);
+  --line-soft: color-mix(in srgb, var(--line) 55%, var(--bg));
+  --dim: var(--orsko-muted);
+  --accent: var(--orsko-ultramarine);
+  --accent-fg: var(--orsko-paper);
+  --invert-bg: var(--orsko-ink);
+  --invert-fg: var(--orsko-paper);
+  /* The CLI ground: ink in both themes, as in the guidelines' terminal. */
+  --term-bg: var(--orsko-ink-dark);
+  --term-fg: var(--orsko-paper);
+  --term-dim: var(--orsko-muted-dark);
+  --term-accent: var(--orsko-ultramarine-dark);
+  --term-border: var(--orsko-ink-dark);
+  --danger: var(--orsko-contradict);
+  --font: var(--orsko-font-display);
+  --mono: var(--orsko-font-mono);
+  --shell: 1060px;
+  --radius: 6px;
+  /* The launch film's graph-paper ground. */
+  --grid-line: rgba(20, 23, 26, 0.06);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --grid-line: rgba(241, 242, 238, 0.07);
+    --bg: var(--orsko-ink-dark);
+    --fg: var(--orsko-paper);
+    --surface: var(--orsko-panel-dark);
+    --line: var(--orsko-rule-dark);
+    --dim: var(--orsko-muted-dark);
+    --accent: var(--orsko-ultramarine-dark);
+    --accent-fg: var(--orsko-ink);
+    --invert-bg: var(--orsko-paper);
+    --invert-fg: var(--orsko-ink);
+    --danger: #de6656;
+    /* On the dark ground the terminal block needs a rule to stay a block. */
+    --term-border: var(--orsko-rule-dark);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --grid-line: rgba(241, 242, 238, 0.07);
+  --bg: var(--orsko-ink-dark);
+  --fg: var(--orsko-paper);
+  --surface: var(--orsko-panel-dark);
+  --line: var(--orsko-rule-dark);
+  --dim: var(--orsko-muted-dark);
+  --accent: var(--orsko-ultramarine-dark);
+  --accent-fg: var(--orsko-ink);
+  --invert-bg: var(--orsko-paper);
+  --invert-fg: var(--orsko-ink);
+  --danger: #de6656;
+  --term-border: var(--orsko-rule-dark);
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.62;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h1 { font-size: 27px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.12; }
+h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.25; }
+h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3; }
+p { margin: 0 0 12px; }
+p:last-child { margin-bottom: 0; }
+
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--line); }
+a:hover { text-decoration-color: currentcolor; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+code, pre, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 0.92em; font-weight: 500; }
+pre {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  margin: 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.hidden { display: none; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.muted { color: var(--dim); }
+.muted.small, .small { font-size: 14px; }
+.fine { color: var(--dim); font-size: 13px; margin: 12px 0 0; }
+.lede { color: var(--dim); margin: 0 0 20px; }
+
+/* The mono eyebrow: labels, section kickers, badges. */
+.kicker, .paste-label, .badge, .step-n, .replay-head, .key-meta, .room-meta {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ---------- layout ---------- */
+
+.shell { width: 100%; max-width: var(--shell); margin: 0 auto; padding: 0 26px; }
+.wrap { max-width: var(--shell); margin: 0 auto; padding: 34px 26px 96px; }
+
+/* ---------- nav ---------- */
+
+.nav { border-bottom: 1px solid var(--line); }
+/* Two groups, edge to edge: the lockup + section links on the left, the
+   theme control + account (or sign-in) on the right. No absolute positioning
+   and no single-item auto margins — space-between does the split. */
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 26px; }
+.nav-left { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.brand-lockup { display: inline-flex; align-items: center; color: var(--fg); text-decoration: none; }
+/* The circle is half the lockup's height, and the primary mark's 3u gutter is
+   only drawn at 20px and up, so this height holds at every breakpoint: 44px
+   puts the circle at 22px. Below it the small variant would be required. */
+.brand-lockup svg { display: block; width: auto; height: 44px; }
+.nav-links { display: flex; gap: 18px; font-size: 14px; }
+.nav-links a { color: var(--dim); text-decoration: none; }
+.nav-links a:hover { color: var(--fg); }
+.nav-tail { display: flex; align-items: center; gap: 12px; }
+
+/* Three-state theme control, rendered by theme.js. */
+.theme-control { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.theme-control button {
+  background: none;
+  border: 0;
+  border-left: 1px solid var(--line);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 0;
+}
+.theme-control button:first-child { border-left: 0; }
+.theme-control button:hover { color: var(--fg); }
+.theme-control button[aria-pressed="true"] { background: var(--surface); color: var(--fg); }
+
+/* ---------- buttons ---------- */
+
+button { font-family: inherit; }
+.btn, button {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 9px 15px;
+  font: 600 14px/1.25 var(--font);
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  text-decoration: none;
+  background: none;
+  color: var(--fg);
+}
+button:disabled, .btn:disabled { opacity: 0.55; cursor: default; }
+.btn-primary { background: var(--invert-bg); color: var(--invert-fg); border-color: var(--invert-bg); }
+.btn-primary:hover { opacity: 0.86; }
+/* The one ultramarine element in the view it is mounted in. */
+.btn-accent { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.btn-accent:hover { opacity: 0.9; }
+.btn-ghost { background: none; color: var(--fg); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--dim); }
+.btn-sm { padding: 7px 11px; font-size: 13px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn-row-center { justify-content: flex-start; }
+
+/* The small mono control beside a label — copy, revoke, and friends. */
+button.secondary, .secondary {
+  background: none;
+  color: var(--dim);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2px 9px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+button.secondary:hover { color: var(--fg); border-color: var(--dim); }
+
+.linklike { padding: 0; border: 0; background: none; color: var(--fg); font: inherit; text-align: left; cursor: pointer; }
+.linklike:hover { text-decoration: underline; }
+
+/* ---------- forms ---------- */
+
+.link-form { margin: 16px 0 0; max-width: 460px; }
+.link-form label { display: block; font-size: 13px; color: var(--dim); margin-bottom: 7px; }
+.link-row { display: flex; gap: 8px; }
+.link-form input, .invite-address {
+  flex: 1;
+  min-width: 0;
+  font: 400 13px/1.5 var(--mono);
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+}
+.link-form input::placeholder { color: var(--dim); }
+.form-error { min-height: 18px; margin: 8px 0 0; font-size: 13px; color: var(--danger); }
+
+/* ---------- panels ---------- */
+
+.card, .result {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 18px 20px;
+  margin-top: 18px;
+}
+.card > h2 { margin-bottom: 8px; }
+.label-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.badge { letter-spacing: 0.14em; }
+h1 .badge { margin-left: 10px; vertical-align: middle; }
+/* The room's live state: the one ultramarine element on the room view. */
+#state.is-live { color: var(--accent); }
+.result pre { margin: 8px 0 16px; }
+/* A block inside a panel drops to the page ground, so it reads as a well. */
+.card pre, .result pre { background: var(--bg); }
+.result #open { font-size: 14px; }
+
+/* ---------- hero ---------- */
+
+.hero { padding: 54px 26px 30px; border-top: 0; }
+.hero h1 { font-size: clamp(32px, 5.6vw, 46px); line-height: 1.03; font-weight: 800; letter-spacing: -0.032em; max-width: 19ch; margin: 12px 0 0; }
+.hero-lede { color: var(--dim); font-size: 17px; margin: 14px 0 22px; max-width: 54ch; }
+/* Reserve the room the optional link field needs so revealing it shifts nothing below. */
+.actions { min-height: 176px; }
+.actions .btn-row { justify-content: flex-start; }
+
+/* ---------- launch film ---------- */
+
+.film-section { padding-bottom: 26px; }
+.film-section .kicker { margin: 0 0 10px; }
+.film { margin: 0; background: var(--surface); border: 1px solid var(--line); }
+/* The width/height attributes reserve the 16:9 box before metadata loads, so nothing below shifts. */
+.film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--surface); }
+
+/* ---------- replay ---------- */
+
+.replay-section { padding-bottom: 34px; }
+.replay { background: var(--surface); border: 1px solid var(--line); padding: 14px 16px; font: 400 13px/1.5 var(--mono); }
+.replay-head { display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid var(--line-soft); text-transform: none; letter-spacing: 0.02em; font-size: 11px; }
+.replay-meta { letter-spacing: 0.1em; text-transform: uppercase; }
+.replay .msg { grid-template-columns: 20px 66px 1fr; gap: 10px; padding: 6px 0; }
+.replay .msg .from, .replay .msg .text { font-size: 12.5px; }
+.replay .msg .ava svg { width: 16px; height: 16px; }
+.replay .msg .code { margin: 6px 0 0; background: var(--bg); border: 1px solid var(--line-soft); padding: 8px 10px; font-size: 12px; overflow-x: auto; }
+.replay .msg[data-pending="1"] { opacity: 0; }
+.replay .msg[data-shown="1"] { animation: replay-in 0.45s ease both; }
+@keyframes replay-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.logos { color: var(--dim); font-size: 14px; margin: 14px 0 0; }
+.logos b { color: var(--fg); font-weight: 600; }
+
+/* ---------- sections ---------- */
+
+.sec { border-top: 1px solid var(--line); padding: 44px 0; }
+.sec .kicker { margin: 0 0 10px; }
+.sec h2 { margin: 0 0 10px; }
+
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 26px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.step { padding: 16px 22px 4px 0; border-right: 1px solid var(--line-soft); }
+.step:last-child { border-right: 0; }
+.step-n { margin: 0 0 8px; letter-spacing: 0.14em; }
+.step h3 { margin: 0 0 6px; }
+.step p { margin: 0; color: var(--dim); font-size: 14px; }
+
+.paste-example { background: var(--surface); border: 1px solid var(--line); padding: 14px 16px; margin-top: 26px; }
+.paste-label { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+#paste-example-text { margin: 0; font: 400 12.5px/1.65 var(--mono); word-break: break-word; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+.code-block { background: var(--term-bg); padding: 16px 18px; overflow-x: auto; border: 1px solid var(--term-border); }
+.code-block pre { background: none; border: 0; padding: 0; margin: 0; white-space: pre; }
+.code-block code { color: var(--term-fg); font-size: 12px; line-height: 1.75; font-weight: 400; }
+.code-block .c { color: var(--term-dim); }
+
+.trust { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 30px; margin: 26px 0 0; padding: 0; list-style: none; }
+.trust li { padding-left: 16px; border-left: 1px solid var(--line); font-size: 14px; color: var(--dim); line-height: 1.55; }
+.note { border-top: 1px solid var(--line); padding-top: 12px; margin: 26px 0 0; font-size: 14px; color: var(--dim); }
+
+.cta { text-align: left; }
+.cta .muted { margin-bottom: 18px; }
+
+/* ---------- footer ---------- */
+
+.foot { border-top: 1px solid var(--line); margin-top: 10px; }
+.foot-inner { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; color: var(--dim); font-size: 13px; padding: 22px 26px; }
+.foot-wordmark { display: inline-flex; color: var(--fg); }
+.foot-wordmark svg { display: block; width: auto; height: 17px; }
+.foot-links a { color: var(--dim); text-decoration: none; }
+.foot-links a:hover { color: var(--fg); text-decoration: underline; }
+
+/* ---------- transcript ---------- */
+
+.members { color: var(--dim); font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; margin: 8px 0 18px; }
+#room-id { font-weight: 500; }
+#transcript { padding: 4px 20px 12px; }
+.msg { display: grid; grid-template-columns: 28px 110px 1fr; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line-soft); align-items: start; font-family: var(--mono); font-size: 13px; line-height: 1.6; }
+.msg:first-child { border-top: 0; }
+.msg .from { font-weight: 500; word-break: break-all; }
+.msg.system .from, .msg.system .text { color: var(--dim); font-style: italic; }
+.msg .text { white-space: pre-wrap; word-break: break-word; }
+.msg .att a { display: inline-block; margin-top: 5px; font-size: 12.5px; }
+.ava { line-height: 0; }
+.ava svg { width: 24px; height: 24px; }
+.members .ava { display: inline-block; margin-right: 5px; }
+.members .ava svg { width: 18px; height: 18px; vertical-align: middle; }
+.members .member.is-away { opacity: 0.45; }
+
+/* ---------- room: notice, outcome, owner panel ---------- */
+
+.notice { color: var(--dim); font-size: 13px; margin: 6px 0 14px; }
+.outcome { margin: 0 0 18px; }
+.outcome .fine { margin: 0; }
+.outcome-text { white-space: pre-wrap; word-break: break-word; margin: 10px 0 0; }
+.transcript-head { justify-content: flex-end; margin: 18px 0 8px; }
+.privacy-panel .label-row { justify-content: space-between; }
+
+/* ---------- nav account menu ---------- */
+
+#nav-account { display: inline-flex; align-items: center; }
+.account-menu { position: relative; }
+.account-summary { display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer; list-style: none; font-size: 13px; }
+.account-summary::-webkit-details-marker { display: none; }
+.account-avatar { border-radius: 50%; display: block; width: 22px; height: 22px; }
+/* Fallback tile for a magic-link user (no avatarUrl) and for a dead GitHub
+   avatar URL (see account.js's img onerror). Square, unlike the round
+   image, so it always reads as a placeholder rather than a broken photo. */
+.account-avatar-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1;
+  color: var(--fg);
+}
+.account-name { max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-links { position: absolute; right: 0; top: calc(100% + 7px); z-index: 10; display: flex; flex-direction: column; gap: 8px; min-width: 156px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); font-size: 14px; }
+.account-links a { color: var(--fg); text-decoration: none; }
+.account-links a:hover { text-decoration: underline; }
+
+/* ---------- /me/keys ---------- */
+
+.keys-shell { text-align: left; }
+.key-list { list-style: none; margin: 0; padding: 0; }
+.key-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line-soft); }
+.key-row:first-child { border-top: 0; }
+.key-label { font-weight: 600; }
+.key-meta { margin-top: 3px; letter-spacing: 0.1em; }
+/* The one-time reveal: the one ultramarine element on the keys page. */
+#reveal-card { border-left: 2px solid var(--accent); }
+#reveal-key { border-color: var(--line); }
+#reveal-key code { color: var(--fg); word-break: break-all; }
+
+/* ---------- /me history ---------- */
+
+.filter-tabs { display: flex; gap: 20px; margin: 24px 0 0; border-bottom: 1px solid var(--line); }
+.filter-tabs .btn, .filter-tabs .btn-ghost { border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 8px 0; color: var(--dim); font-size: 13px; }
+.filter-tabs .btn:hover { color: var(--fg); }
+/* The active filter: the one ultramarine element on the history page. */
+.filter-tabs .is-active, .filter-tabs .btn-ghost.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+.room-list { list-style: none; margin: 0; padding: 0; }
+.room-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line-soft); }
+.room-row:first-child { border-top: 0; }
+.room-main { flex: 1; min-width: 0; }
+.room-title { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-weight: 600; font-family: var(--mono); font-size: 13.5px; }
+.room-meta { margin-top: 3px; letter-spacing: 0.1em; }
+.avatar-stack { display: flex; align-items: center; padding-right: 8px; }
+.avatar-slot { display: inline-flex; width: 30px; height: 30px; margin-right: -8px; border-radius: 50%; background: var(--bg); outline: 1px solid var(--line); overflow: hidden; }
+.avatar-slot svg { width: 30px; height: 30px; }
+.avatar-more { margin-left: 14px; font-family: var(--mono); font-size: 11px; color: var(--dim); }
+.start-room-block { margin-bottom: 8px; }
+.start-room-title { font-size: 16px; margin: 0 0 12px; }
+.start-room-compact .btn-row { justify-content: flex-start; }
+.start-room-compact .form-error { min-height: 0; }
+.start-room-compact + .result, .start-room-block .result { margin-top: 14px; }
+
+/* ---------- invites ---------- */
+
+.invite-panel .label-row { margin-top: 12px; }
+.invite-sentence { white-space: pre-wrap; word-break: break-word; }
+.invite-list { margin-top: 12px; display: grid; gap: 8px; }
+.invite-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; font-family: var(--mono); font-size: 12.5px; color: var(--dim); }
+#private-row label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+
+/* ---------- disclosures ---------- */
+
+details.card summary, .invite-panel summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+details.card summary::-webkit-details-marker { display: none; }
+details.card summary::before { content: "+"; font-family: var(--mono); font-size: 13px; color: var(--dim); }
+details.card[open] summary::before { content: "\2212"; }
+details.card[open] summary { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line-soft); }
+
+/* The mono eyebrow wins over the generic small-text sizes it sits beside. */
+.key-row .key-meta, .room-main .room-meta { font-size: 10.5px; font-family: var(--mono); }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 860px) {
+  .steps, .trust, .two-col { grid-template-columns: 1fr; }
+  .step { border-right: 0; border-bottom: 1px solid var(--line-soft); padding: 16px 0; }
+  .step:last-child { border-bottom: 0; }
+  .trust li { padding-left: 14px; }
+  .hero { padding-top: 38px; }
+  .actions { min-height: 0; }
+  .code-block pre { white-space: pre; }
+}
+
+@media (max-width: 640px) {
+  .shell, .nav-inner, .foot-inner { padding-left: 18px; padding-right: 18px; }
+  .wrap { padding: 26px 18px 72px; }
+  .hero { padding-left: 18px; padding-right: 18px; }
+  /* The nav collapses to the lockup, the theme control and the account slot. */
+  .nav-links { display: none; }
+  .nav-inner { gap: 10px; }
+  .msg { grid-template-columns: 24px 1fr; gap: 4px 10px; }
+  .msg .from { grid-column: 2; }
+  .msg > div:last-child { grid-column: 2; }
+  .msg .ava { grid-row: span 2; }
+  .replay .msg { grid-template-columns: 20px 1fr; gap: 2px 8px; }
+  .replay .msg .ava { grid-row: span 2; }
+  /* The nav must stay on one line at 375px next to a 44px lockup, so the
+     account control shows the avatar alone: account.js puts the name on the
+     button's aria-label, and the visible name text steps aside here. Below
+     640px this is the summary's only accessible name, so it always fires. */
+  .nav-tail, #nav-account, .account-menu { min-width: 0; }
+  .account-summary { min-width: 0; max-width: 100%; }
+  .account-name { display: none; }
+  .theme-control button { padding: 5px 6px; letter-spacing: 0.06em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .replay .msg[data-shown="1"] { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- room: server-rendered instructions ---------- */
+
+.agent-instructions { max-height: 360px; overflow-y: auto; margin-top: 10px; font-size: 12px; }
+
+/* ---------- connect page ---------- */
+
+.connect-section { margin-top: 30px; }
+.connect-section h2 { margin: 0 0 8px; }
+.connect-section ol { margin: 0 0 12px; padding-left: 22px; }
+.connect-section li { margin: 0 0 6px; }
+
+/* ---------- room: relay seat ---------- */
+
+.relay label { display: block; font-size: 13px; color: var(--dim); margin: 14px 0 7px; }
+.relay input, .relay textarea { flex: 1; min-width: 0; width: 100%; box-sizing: border-box; font: 400 13px/1.5 var(--mono); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 10px; }
+.relay .label-row { margin-top: 12px; }
+.relay .btn-row { margin-top: 10px; }
+.relay pre { margin-top: 10px; max-height: 240px; overflow-y: auto; }
+
+/* ---------- analytics consent (public pages) ---------- */
+
+/* Inverted ground so the banner reads against the page in both themes (ink on a
+   light page, paper on a dark one). No accent: the page's one ultramarine element
+   stays the hero's call to action. */
+.consent {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 50;
+  max-width: 580px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  padding: 16px 18px;
+  background: var(--invert-bg);
+  color: var(--invert-fg);
+  border: 1px solid var(--invert-bg);
+  border-radius: var(--radius);
+}
+.consent-text { flex: 1 1 260px; margin: 0; font-size: 14px; line-height: 1.45; color: var(--invert-fg); }
+.consent-text a { color: var(--invert-fg); text-decoration-color: currentcolor; }
+/* The actions grow into the rest of the row and hold their buttons at its end (no auto margins). */
+.consent-actions { display: flex; flex: 1 0 auto; justify-content: flex-end; gap: 8px; }
+/* The shared button styles assume the page ground, so they are inverted here too. */
+.consent .btn-primary { background: var(--invert-fg); color: var(--invert-bg); border-color: var(--invert-fg); }
+.consent .btn-ghost { background: none; color: var(--invert-fg); border-color: color-mix(in srgb, var(--invert-fg) 45%, var(--invert-bg)); }
+.consent .btn-ghost:hover { border-color: var(--invert-fg); }
+.consent a:focus-visible, .consent button:focus-visible { outline-color: var(--invert-fg); }
+@media print { .consent { display: none; } }
+
+/* ---------- landing bands (the launch film, as a page) ---------- */
+
+/* Each band is a full-width stripe with its own ground, the way the film cuts
+   between frames. The shell inside keeps the 1060px measure. */
+.band { border-top: 1px solid var(--line); padding: 64px 0; }
+.band:first-child { border-top: 0; }
+.band-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.band-panel { background: var(--surface); }
+/* The ink band inverts the ground, as the film does on its closing frames. */
+.band-ink { background: var(--invert-bg); color: var(--invert-fg); border-top-color: var(--invert-bg); }
+.band-ink .kicker, .band-ink .muted, .band-ink .fine { color: color-mix(in srgb, var(--invert-fg) 62%, var(--invert-bg)); }
+.band-ink .btn-primary { background: var(--invert-fg); color: var(--invert-bg); border-color: var(--invert-fg); }
+.band-ink .btn-ghost { color: var(--invert-fg); border-color: color-mix(in srgb, var(--invert-fg) 45%, var(--invert-bg)); }
+.band-ink .btn-ghost:hover { border-color: var(--invert-fg); }
+
+/* The film's display type: one statement, as large as the measure allows. */
+.display { font-size: clamp(38px, 6.4vw, 72px); font-weight: 800; letter-spacing: -0.035em; line-height: 0.98; margin: 10px 0 0; text-wrap: balance; }
+.display-sm { font-size: clamp(26px, 3.4vw, 38px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.06; margin: 10px 0 0; }
+
+/* ---------- hero band ---------- */
+
+.hero.band { padding: 72px 0 68px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr); gap: 46px; align-items: center; }
+.hero h1 { font-size: clamp(38px, 5.8vw, 62px); line-height: 1.0; font-weight: 800; letter-spacing: -0.035em; max-width: 15ch; margin: 12px 0 0; }
+.hero-lede { color: var(--dim); font-size: 17px; margin: 16px 0 24px; max-width: 46ch; }
+.hero-room { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+/* The replay measures its own height once the rows render; this holds the column
+   steady before that, so the hero never reflows around it. */
+.hero-room .replay { min-height: 300px; }
+.hero-room .fine { margin: 0; }
+
+/* The room card: the film's hero object, in the product's own transcript style. */
+.room-card { box-shadow: none; }
+.room-card .room-card-url { font-weight: 500; color: var(--fg); letter-spacing: 0.01em; }
+
+/* ---------- join rows (every assistant, its own way in) ---------- */
+
+.join-rows { list-style: none; margin: 30px 0 0; padding: 0; border: 1px solid var(--line); background: var(--bg); }
+.join-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto auto; gap: 14px; align-items: center; padding: 16px 18px; border-bottom: 1px solid var(--line-soft); font-family: var(--mono); }
+.join-row:last-child { border-bottom: 0; }
+.join-seq { color: var(--dim); font-size: 12px; font-variant-numeric: tabular-nums; }
+.join-name { font-size: 16px; font-weight: 500; }
+.join-state { color: var(--dim); font-size: 13px; font-style: italic; }
+.pill { border: 1px solid var(--fg); border-radius: 4px; padding: 4px 10px; font-size: 12px; white-space: nowrap; }
+.pill-accent { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+
+/* ---------- film band ---------- */
+
+.film-section .film { border-color: color-mix(in srgb, var(--invert-fg) 22%, var(--invert-bg)); background: var(--invert-bg); }
+
+/* ---------- cta band ---------- */
+
+.cta-inner { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.cta-inner .muted { margin: 0; max-width: 52ch; }
+.cta .btn-row { margin-top: 4px; }
+
+/* ---------- scroll reveals ---------- */
+
+/* Gated on the flag reveal.js sets: with no JS (or a failed load) every block
+   stays visible instead of being hidden by CSS that nothing will undo. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal-ready="1"] [data-reveal] { opacity: 0; transform: translateY(14px); }
+  [data-reveal-ready="1"] [data-reveal][data-revealed="1"] {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 34px; }
+  .hero h1 { max-width: none; }
+  .band { padding: 48px 0; }
+  .hero.band { padding: 44px 0 48px; }
+  .join-row { grid-template-columns: 26px minmax(0, 1fr); row-gap: 8px; }
+  .join-row .join-state { grid-column: 2; }
+  .join-row .pill { grid-column: 2; justify-self: start; }
+}
+
+/* ---------- sign-in ---------- */
+
+/* The form on the left at a readable measure, what an account adds on the
+   right in the product's own row style. */
+/* The nav is 73px tall (14px padding either side of a 44px lockup, plus its
+   rule), so the band fills what is left of the first screen and centres in it. */
+.auth-band { min-height: calc(100vh - 73px); display: flex; align-items: center; }
+.auth-band > .shell { width: 100%; }
+.auth-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr); gap: 46px; align-items: start; }
+.auth-copy #signin-card, .auth-copy #sent-card { max-width: 480px; }
+.auth-aside { border: 1px solid var(--line); background: var(--bg); }
+.auth-aside-head { margin: 0; padding: 13px 18px; border-bottom: 1px solid var(--line); }
+.auth-row { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; padding: 15px 18px; border-bottom: 1px solid var(--line-soft); font-family: var(--mono); }
+.auth-row:last-of-type { border-bottom: 0; }
+.auth-seq { color: var(--dim); font-size: 12px; font-variant-numeric: tabular-nums; }
+.auth-text { font-size: 13px; color: var(--dim); line-height: 1.5; }
+.auth-text b { display: block; font-size: 14px; font-weight: 500; color: var(--fg); margin-bottom: 2px; }
+.auth-note { margin: 0; padding: 13px 18px; border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; }
+
+@media (max-width: 900px) {
+  .auth-grid { grid-template-columns: 1fr; gap: 30px; }
+}
+
+/* ---------- account pages ---------- */
+
+/* History and API keys sit on the same grid ground as the rest of the site. */
+/* Fills the first screen the way the sign-in band does, so a short signed-out
+   state never leaves the ground ending halfway down. */
+.account-band { padding: 56px 0 72px; min-height: calc(100vh - 73px); }
+.account-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.72fr); gap: 46px; align-items: start; }
+.account-main { min-width: 0; }
+.auth-text code { font-size: 12px; font-weight: 400; color: var(--fg); word-break: break-all; }
+
+@media (max-width: 900px) {
+  .account-grid { grid-template-columns: 1fr; gap: 30px; }
+}
+
+/* ---------- feedback ---------- */
+
+.feedback-label { display: block; font-size: 13px; color: var(--dim); margin: 0 0 7px; }
+.feedback-label + input { margin-bottom: 0; }
+.feedback-optional { display: block; font-size: 12px; color: var(--dim); margin-top: 2px; }
+#feedback-message, #feedback-contact {
+  width: 100%;
+  box-sizing: border-box;
+  font: 400 13px/1.6 var(--mono);
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+#feedback-message { resize: vertical; min-height: 140px; }
+#feedback-message::placeholder, #feedback-contact::placeholder { color: var(--dim); }
+.feedback-count { margin: 6px 0 18px; font-family: var(--mono); font-size: 12px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.feedback-actions { margin-top: 16px; }

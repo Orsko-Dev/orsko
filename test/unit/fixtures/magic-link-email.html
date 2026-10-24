@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>Sign in to Orsko</title>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .dm-ground { background-color: #0E1013 !important; }
+        .dm-card { background-color: #171A1E !important; border-color: #2B2F35 !important; }
+        .dm-text { color: #F1F2EE !important; }
+        .dm-muted { color: #8C9298 !important; }
+        .dm-rule { background-color: #2B2F35 !important; }
+        .dm-accent { background-color: #7C8AFF !important; }
+        .dm-button { background-color: #F1F2EE !important; }
+        .dm-button a { background-color: #F1F2EE !important; color: #14171A !important; }
+        .dm-button a span { color: #14171A !important; }
+      }
+    </style>
+  </head>
+  <body data-dark style="margin:0;padding:0;background-color:#F1F2EE;" class="dm-ground">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" data-dark class="dm-ground" style="background-color:#F1F2EE;margin:0;padding:24px 12px;">
+      <tr>
+        <td align="center" style="padding:0;">
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" data-dark class="dm-card" style="width:100%;max-width:600px;background-color:#FBFBF9;border:1px solid #D6D9D1;border-radius:6px;">
+            <tr>
+              <td align="center" style="padding:32px 32px 0 32px;text-align:center;">
+                <picture>
+                  <source media="(prefers-color-scheme: dark)" srcset="https://orsko.dev/brand/orsko-mark-email-paper.png">
+                  <img src="https://orsko.dev/brand/orsko-mark-email.png" width="40" height="40" alt="Orsko" style="display:block;width:40px;height:40px;border:0;margin:0 auto;">
+                </picture>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding:20px 32px 0 32px;text-align:center;">
+                <table role="presentation" align="center" width="48" cellpadding="0" cellspacing="0" border="0" style="width:48px;margin:0 auto;">
+                  <tr><td data-dark class="dm-accent" style="background-color:#2438C8;height:2px;line-height:2px;font-size:0;">&nbsp;</td></tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" data-dark class="dm-text" style="padding:20px 32px 0 32px;text-align:center;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;font-size:22px;font-weight:700;line-height:1.3;letter-spacing:-0.02em;color:#14171A;">
+                Sign in to Orsko
+              </td>
+            </tr>
+            <tr>
+              <td align="center" data-dark class="dm-text" style="padding:12px 32px 0 32px;text-align:center;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;font-size:16px;line-height:1.6;color:#14171A;">
+                This link signs you in once and expires in 15 minutes.
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding:24px 32px 0 32px;text-align:center;">
+                <table role="presentation" align="center" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+                  <tr>
+                    <td data-dark class="dm-button" bgcolor="#14171A" style="padding:12px 22px;background-color:#14171A;border-radius:6px;">
+                      <a href="https://orsko.dev/auth/email/callback?token=abc123" style="display:block;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;font-size:16px;font-weight:600;line-height:1;color:#F1F2EE;text-decoration:none;">
+                        <span style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;color:#F1F2EE;text-decoration:none;">Sign in</span>
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" data-dark class="dm-muted" style="padding:24px 32px 0 32px;text-align:center;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;font-size:14px;line-height:1.6;color:#63696B;">
+                Or paste this into your browser:
+              </td>
+            </tr>
+            <tr>
+              <td align="center" data-dark class="dm-text" style="padding:8px 32px 0 32px;text-align:center;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:13px;line-height:1.6;color:#14171A;word-break:break-all;overflow-wrap:anywhere;">
+                <a href="https://orsko.dev/auth/email/callback?token=abc123" data-dark class="dm-text" style="font-family:ui-monospace, SFMono-Regular, Menlo, monospace;color:#14171A;text-decoration:underline;word-break:break-all;overflow-wrap:anywhere;">https://orsko.dev/auth/email/callback?token=abc123</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:28px 32px 0 32px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr><td data-dark class="dm-rule" style="background-color:#D6D9D1;height:1px;line-height:1px;font-size:0;border:0;">&nbsp;</td></tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" data-dark class="dm-muted" style="padding:16px 32px 8px 32px;text-align:center;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;font-size:13px;line-height:1.6;color:#63696B;">
+                You are receiving this because someone asked for a sign-in link for this address. If that was not you, ignore this email.
+              </td>
+            </tr>
+            <tr>
+              <td align="center" data-dark class="dm-muted" style="padding:0 32px 32px 32px;text-align:center;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;font-size:13px;line-height:1.6;color:#63696B;">
+                orsko.dev
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

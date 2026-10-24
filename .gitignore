@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.wrangler/
+.dev.vars
+*.log
+coverage/
+.DS_Store
+worker-configuration.d.ts
+.superpowers/
+.claude/worktrees/
+channel/node_modules
+channel/dist

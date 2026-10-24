@@ -1,0 +1,32 @@
+{
+  "name": "orsko-channel",
+  "version": "0.1.0",
+  "description": "Claude Code channel for Orsko rooms: injects room messages into a live session over MCP.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "orsko-channel": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc && node -e \"require('node:fs').chmodSync('dist/index.js', 0o755)\"",
+    "test": "vitest run",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/ws": "^8.18.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11",
+    "ws": "^8.21.3"
+  }
+}

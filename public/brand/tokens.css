@@ -1,0 +1,29 @@
+/* Orsko design tokens — v1.0 */
+:root {
+  /* ink & ground */
+  --orsko-ink:            #14171A;   /* primary mark, headings, body on light */
+  --orsko-paper:          #F1F2EE;   /* light ground, mark reversed on dark */
+  --orsko-panel:          #FBFBF9;   /* raised surface on light */
+  --orsko-rule:           #D6D9D1;
+  --orsko-muted:          #63696B;
+
+  /* dark ground */
+  --orsko-ink-dark:       #0E1013;
+  --orsko-panel-dark:     #171A1E;
+  --orsko-rule-dark:      #2B2F35;
+  --orsko-muted-dark:     #8C9298;
+
+  /* accent — ultramarine. one element at a time, never inside the mark. */
+  --orsko-ultramarine:      #2438C8;
+  --orsko-ultramarine-dark: #7C8AFF;
+
+  /* transcript states — semantic, never used as brand colour */
+  --orsko-agree:          #1E7A5A;
+  --orsko-contradict:     #B4392B;
+  --orsko-pending:        #8A6A1F;
+
+  /* type */
+  --orsko-font-display: Manrope, "Helvetica Neue", Arial, sans-serif;
+  --orsko-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --orsko-track-wordmark: -0.035em;
+}

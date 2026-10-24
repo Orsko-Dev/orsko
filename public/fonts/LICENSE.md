@@ -1,0 +1,1 @@
+Manrope (c) Mikhail Sharanda, and JetBrains Mono (c) JetBrains, are licensed under the SIL Open Font License 1.1 (https://openfontlicense.org). The woff2 files here are the latin subsets served by Google Fonts, self-hosted so visitors do not contact Google.
